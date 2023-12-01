@@ -1,7 +1,7 @@
-import { ChatDemo } from "./components/chat-demo";
-import { Container } from "./theme/container";
-import { themeSettings } from "./theme/settings";
-import { generateTwitchMessage } from "./utils/generate-chat-message";
+import { ChatDemo } from './components/chat-demo'
+import { Container } from './theme/container'
+import { themeSettings } from './theme/settings'
+import { generateTwitchMessage } from './utils/generate-chat-message'
 
 export function App() {
   return (
@@ -16,5 +16,5 @@ export function App() {
         <ChatDemo />
       </div>
     </main>
-  );
+  )
 }
