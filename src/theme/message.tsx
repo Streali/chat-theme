@@ -1,14 +1,14 @@
-import { ChatSettings, TwitchMessage } from "../types";
-import { motion } from "framer-motion";
-import { CustomSettings } from "./settings";
+import { ChatSettings, TwitchMessage } from '../types'
+import { motion } from 'framer-motion'
+import { CustomSettings } from './settings'
 
 type Props = {
-  message: TwitchMessage;
-  settings: ChatSettings & CustomSettings;
-};
+  message: TwitchMessage
+  settings: ChatSettings & CustomSettings
+}
 
 export function Message(props: Props) {
-  const { message, settings } = props;
+  const { message, settings } = props
 
   const hideAnimation = {
     initial: {
@@ -22,27 +22,27 @@ export function Message(props: Props) {
           settings?.hideTime === 0 || !settings?.hideTime
             ? 100000
             : settings?.hideTime,
-        ease: "easeInOut",
-        type: "spring",
+        ease: 'easeInOut',
+        type: 'spring',
       },
     },
-  };
+  }
 
   const displayAnimation = {
     initial: {
-      [settings?.alignment === "left" ? "right" : "left"]: 50,
+      [settings?.alignment === 'left' ? 'right' : 'left']: 50,
     },
     in: {
-      [settings?.alignment === "left" ? "right" : "left"]: 0,
+      [settings?.alignment === 'left' ? 'right' : 'left']: 0,
       transition: {
         duration: 1,
-        ease: "easeInOut",
-        type: "spring",
+        ease: 'easeInOut',
+        type: 'spring',
         stiffness: 260,
         damping: 20,
       },
     },
-  };
+  }
 
   return (
     <motion.div
@@ -54,16 +54,16 @@ export function Message(props: Props) {
     >
       <motion.div
         variants={displayAnimation}
-        initial={settings?.animation ? "initial" : false}
-        animate={settings?.animation ? "in" : false}
+        initial={settings?.animation ? 'initial' : false}
+        animate={settings?.animation ? 'in' : false}
         className="message__inner"
         style={{
           alignItems:
-            settings.alignment === "left"
-              ? "flex-start"
-              : settings.alignment === "center"
-                ? "center"
-                : "flex-end",
+            settings.alignment === 'left'
+              ? 'flex-start'
+              : settings.alignment === 'center'
+                ? 'center'
+                : 'flex-end',
         }}
       >
         <div className="message__username">
@@ -81,5 +81,5 @@ export function Message(props: Props) {
         ></div>
       </motion.div>
     </motion.div>
-  );
+  )
 }
