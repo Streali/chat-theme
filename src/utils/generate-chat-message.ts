@@ -2,7 +2,7 @@ import chance from 'chance'
 import { parse } from 'simple-tmi-emotes'
 import { TwitchMessage } from '../types'
 
-const kBadgeWhitelist = [
+const kBadgeWhitelist: string[] = [
   'admin',
   'broadcaster',
   'vip',
@@ -10,9 +10,12 @@ const kBadgeWhitelist = [
   'partner',
   'artist',
 ]
-const kBadgeWhiteListKick = ['moderator', 'verified', 'vip']
+const kBadgeWhiteListKick: string[] = ['moderator', 'verified', 'vip']
 
-const exampleMessages = [
+const exampleMessages: {
+  message: string
+  emotes?: Record<string, string[]>
+}[] = [
   {
     message: ':):)',
     emotes: {
@@ -97,7 +100,7 @@ const exampleMessages = [
   },
 ]
 
-const exampleUsernames = [
+const exampleUsernames: string[] = [
   'xX_d4rK_1337_Xx',
   'John',
   'willtraore',
@@ -110,7 +113,7 @@ const exampleUsernames = [
   'romainlanz',
 ]
 
-const exampleColors = [
+const exampleColors: string[] = [
   '#15e64c',
   '#15b8e6',
   '#151ce6',
@@ -123,12 +126,12 @@ const exampleColors = [
   '#e66f15',
 ]
 
-function randomizeBadges(provider: string) {
-  const badgeWhitelist =
+function randomizeBadges(provider: string): string[] {
+  const badgeWhitelist: string[] =
     provider === 'twitch' ? kBadgeWhitelist : kBadgeWhiteListKick
 
-  const badges = new Set()
-  const badgesCount = chance().integer({ min: 0, max: 3 })
+  const badges = new Set<string>()
+  const badgesCount: number = chance().integer({ min: 0, max: 3 })
 
   for (let i = 0; i < badgesCount; i++) {
     badges.add(
@@ -151,13 +154,12 @@ export function generateTwitchMessage(provider = 'twitch'): TwitchMessage {
 
   return {
     username,
-    emotes,
+    emotes: emotes ?? {},
     color,
     badges,
     id: chance().guid(),
     twitch: chance().guid(),
-    date: new Date(),
-    // @ts-ignore
+    date: new Date().toDateString(),
     message: parse(message, emotes ?? {}, {
       format: 'default',
       themeMode: 'light',

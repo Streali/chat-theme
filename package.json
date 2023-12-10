@@ -2,14 +2,15 @@
   "name": "chat-theme",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
-    "dev": "vite",
+    "create-theme": "npx ts-node --skip-project src/utils/create-theme.ts",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "prepare": "husky install",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "dev:gummybear": "cd src/themes/gummybear && npx vite",
+    "dev:example": "cd src/themes/example && npx vite"
   },
   "dependencies": {
     "chance": "^1.1.11",
@@ -20,6 +21,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/chance": "^1.1.6",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
@@ -31,6 +33,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^15.1.0",
     "prettier": "^3.1.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.2.2",
     "vite": "^5.0.0"
   },
