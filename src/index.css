@@ -132,6 +132,13 @@ main {
   align-items: center;
   justify-content: center;
   height: 100vh;
+  background-color: #ffffff;
+  transition: background-color 0.3s ease;
+}
+
+main.dark-mode {
+  background-color: #212328;
+  color: white;
 }
 
 .message-presentation {
@@ -142,13 +149,25 @@ main {
   flex: 1;
 }
 
-.message-demo {
+.chat-demo {
   flex: 1;
   height: 100dvh;
   background-color: #f5f5f5;
-  padding: 20px;
+  transition: background-color 0.3s ease;
 }
 
-.chat-demo {
-  height: 100%;
+.chat-demo.dark-mode {
+  background-color: #17191d;
+}
+
+.settings {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.theme-toggle {
+  font-family: sans-serif;
+  cursor: pointer;
+  user-select: none;
 }
