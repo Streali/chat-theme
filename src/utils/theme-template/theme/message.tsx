@@ -13,51 +13,16 @@ export function Message(props: Props) {
 
   const displayAnimation: Variants = {
     initial: {
-      rotate: (Math.random() * 10 - 5) * settings.messageRotationRadius,
-      width: Math.random() * 10 + settings.messageWidthPercentage + '%',
-      right: Math.random() * 10 - 20,
+      [settings?.alignment === 'left' ? 'right' : 'left']: 50,
     },
     in: {
+      [settings?.alignment === 'left' ? 'right' : 'left']: 0,
       transition: {
-        duration: 2,
+        duration: 1,
         ease: 'easeInOut',
         type: 'spring',
         stiffness: 260,
         damping: 20,
-      },
-    },
-  }
-
-  const usernameAnimation: Variants = {
-    initial: {
-      opacity: 0,
-      right: Math.random() * 10 - 5 + 'em',
-      scale: 0,
-    },
-    in: {
-      scale: 1,
-      right: (Math.random() * 10 - 5) * settings.usernameOffset + 'em',
-      opacity: 1,
-      transition: {
-        type: 'spring',
-      },
-    },
-  }
-
-  const contentAnimation: Variants = {
-    initial: {
-      scale: 0,
-      opacity: 0,
-      right: Math.random() * 10 - 5,
-    },
-    in: {
-      scale: 1,
-      right: (Math.random() * 10 - 5) * settings.messageOffset,
-      opacity: 1,
-
-      transition: {
-        type: 'spring',
-        delay: 0.1,
       },
     },
   }
@@ -69,12 +34,13 @@ export function Message(props: Props) {
       initial="initial"
       animate="in"
     >
-      <div className="message__inner">
-        <motion.div
-          className="message__username"
-          style={{ backgroundColor: settings.usernameBackgroundColor }}
-          variants={usernameAnimation}
-        >
+      <motion.div
+        className="message__inner"
+        variants={displayAnimation}
+        initial={settings?.animation ? 'initial' : false}
+        animate={settings?.animation ? 'in' : false}
+      >
+        <div className="message__username">
           {settings?.badges && (
             <div className="message__username--badges">
               {message.badges.map((badge) => (
@@ -83,14 +49,12 @@ export function Message(props: Props) {
             </div>
           )}
           <div>{message.username}</div>
-        </motion.div>
-        <motion.div
-          variants={contentAnimation}
+        </div>
+        <div
           className="message__content"
-          style={{ backgroundColor: settings.messageBackgroundColor }}
           dangerouslySetInnerHTML={{ __html: message.message }}
         />
-      </div>
+      </motion.div>
     </motion.div>
   )
 }
